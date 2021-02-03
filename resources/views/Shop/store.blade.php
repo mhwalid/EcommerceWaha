@@ -30,7 +30,9 @@
       <div class="row">
         @foreach ($products as $product)
         <div class="col-sm-6 col-lg-4 text-center item mb-4">
-          <a href="{{route('Shop.show' , $product->id)}}"> <img src="assets/images/product_02.png" alt="Image"></a>
+          <dir>
+          <a  href="{{route('Shop.show' , $product->id)}}"> <img style="width:76% ;" src="{{asset('storage/'.$product->photo_principale)}}" alt="Image"></a>
+          </dir>
           <h2 class="text-">{{ $product->name }}</h2>
           <h6 class="text-dark"><a href="shop-single.html"> {{ $product->category->name }}{{ $loop->last ? '' : ', '}}</a></h6>
          

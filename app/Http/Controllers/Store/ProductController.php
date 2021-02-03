@@ -29,7 +29,7 @@ class ProductController extends Controller
                 $query->where('slug', request()->categorie);
             })->orderBy('created_at', 'DESC')->paginate(16);
         } else {
-            $products = Product::with('category')->orderBy('created_at', 'DESC')->paginate(16);
+            $products = Product::with('category')->orderBy('created_at', 'DESC')->paginate(15);
         }
 
         return view('Shop.store', compact('products'));
@@ -108,5 +108,21 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function search()
+    {
+        request()->validate([
+            'search' => 'required|min:3'
+        ]);
+
+
+        $search = request()->input('search');
+
+        $products = Product::where('name', 'like', "%$search%")
+            ->orwhere('description', 'like', "%$search%")->paginate(15);
+
+        return view('Shop.store', compact('products'));
     }
 }
