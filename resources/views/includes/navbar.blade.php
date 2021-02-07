@@ -2,6 +2,7 @@
     <div class="site-navbar py-2">
 
      @include('includes.search')
+    
 
       <div class="container">
         <div class="d-flex align-items-center justify-content-between">
@@ -38,6 +39,7 @@
             <a  class="site-menu-toggle js-menu-toggle ml-3 d-inline-block d-lg-none"><span
                 class="icon-menu"></span></a>
           </div>
+          @include('includes.login')
         </div>
       </div>
     </div>

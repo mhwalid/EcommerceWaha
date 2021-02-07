@@ -10,6 +10,7 @@ use App\Model\Order;
 use DateTime;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class CheckoutController extends Controller
@@ -52,7 +53,7 @@ class CheckoutController extends Controller
             $i++;
         }
         $order->products = serialize($products);
-        $order->user_id = 15;
+        $order->user_id = Auth::guard('customer')->user()->id;
         $order->save();
 
         if ($data['paymentIntent']['status'] == 'succeeded') {

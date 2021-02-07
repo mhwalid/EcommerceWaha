@@ -1,7 +1,9 @@
 <?php
 
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use TCG\Voyager\Facades\Voyager;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,17 +37,27 @@ Route::get('/panier', 'Cart\CartController@index')->name('Cart.index');
 Route::patch('/panier/{rowId}', 'Cart\CartController@update')->name('Cart.update');
 Route::delete('/panier/{rowId}', 'Cart\CartController@destroy')->name('Cart.destroy');
 
-
-// checkout
-Route::get('/checkout', 'Cart\CheckoutController@index')->name('Checkout.index');
-Route::post('/checkout', 'Cart\CheckoutController@store')->name('Checkout.store');
-Route::get('/merci', 'Cart\CheckoutController@thankyou')->name('Checkout.thankyou');
-// });
+Route::group(['middleware' => ['customer', 'auth:customer']], function () {
+    // checkout
+    Route::get('/checkout', 'Cart\CheckoutController@index')->name('Checkout.index');
+    Route::post('/checkout', 'Cart\CheckoutController@store')->name('Checkout.store');
+    Route::get('/merci', 'Cart\CheckoutController@thankyou')->name('Checkout.thankyou');
+});
 Route::get('/wa', function () {
     Cart::destroy();
 });
 
+Route::get('/customer/login', 'Auth\LoginController@showCustomerLoginForm')->name('Login.show');
+Route::get('/customer/register', 'Auth\RegisterController@showCustomerRegisterForm')->name('Login.register');
+Route::post('/customer/login', 'Auth\LoginController@customerLogin');
+Route::post('/customer/register', 'Auth\RegisterController@createCustomer');
+Route::post('/customer/logout', 'Auth\LoginController@logout')->name('Login.logout');
+// Route::view('/customer', 'customer');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -14,11 +14,15 @@
   <link rel="stylesheet" href="{{asset('assets/css/jquery-ui.css')}}">
   <link rel="stylesheet" href="{{asset('assets/css/owl.carousel.min.css')}}">
   <link rel="stylesheet" href="{{asset('assets/css/owl.themedefault.min.css')}}">
-
-  @yield('extra-js')
+   <!-- Styles -->
+   <script src="{{ asset('js/app.js') }}" defer></script>
+ 
   <link rel="stylesheet" href="{{asset('assets/css/aos.css')}}">
 
   <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  @yield('extra-js')
+  @yield('extra-css')
 
 </head>
 <style>
@@ -29,10 +33,10 @@
 </style>
 
 <body>
+  
+  <div id="app" class="site-wrap">
 
-  <div class="site-wrap">
 
-    
     @include('includes.navbar')
         <div class="container">
           @if (session('success'))
@@ -62,7 +66,7 @@
 
     @include('includes.footer')
   </div>
-
+  {{-- make a yiled --}}
   <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
   <script src="{{asset('assets/js/jquery-ui.js')}}"></script>
   <script src="{{asset('assets/js/popper.min.js')}}"></script>
@@ -72,6 +76,8 @@
   <script src="{{asset('assets/js/aos.js')}}"></script>
   <script src="{{asset('assets/js/main.js')}}"></script>
   @yield('js-extra-stripe')
+  <script src="{{ asset('js/app.js') }}" ></script>
+
 </body>
 
 </html>
