@@ -21,7 +21,7 @@
         </a>
 
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{{ route('home') }}">Mes commandes</a>
+            <a class="dropdown-item" href="{{ route('Customer.orders') }}">Mes commandes</a>
 
             <a class="dropdown-item" href="{{ route('logout') }}"
                 onclick="event.preventDefault();
@@ -33,8 +33,7 @@
                 @csrf
                
             </form>
-
-            <h4>{{Auth::guard('customer')->user()->id}}</h4>
+           
         </div>
     </li>
 @endguest

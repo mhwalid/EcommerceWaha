@@ -36,7 +36,7 @@
           <h2 class="text-">{{ $product->name }}</h2>
           <h6 class="text-dark"><a href="shop-single.html"> {{ $product->category->name }}{{ $loop->last ? '' : ', '}}</a></h6>
          
-          <p class="price">$70.00</p>
+          <p class="price">{{ number_format($product->price,2, ',', ' ')}} $</p>
         </div>
         @endforeach
         

@@ -118,4 +118,10 @@ class CartController extends Controller
         Cart::remove($rowId);
         return redirect()->route('Cart.index')->with('success', 'le produit a bien été supprime du panier');
     }
+
+
+    public function customerOrders()
+    {
+        return view('Customer.home');
+    }
 }

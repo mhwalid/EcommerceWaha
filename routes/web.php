@@ -37,11 +37,12 @@ Route::get('/panier', 'Cart\CartController@index')->name('Cart.index');
 Route::patch('/panier/{rowId}', 'Cart\CartController@update')->name('Cart.update');
 Route::delete('/panier/{rowId}', 'Cart\CartController@destroy')->name('Cart.destroy');
 
-Route::group(['middleware' => ['customer', 'auth:customer']], function () {
+Route::group(['middleware' => 'auth:customer'], function () {
     // checkout
     Route::get('/checkout', 'Cart\CheckoutController@index')->name('Checkout.index');
     Route::post('/checkout', 'Cart\CheckoutController@store')->name('Checkout.store');
     Route::get('/merci', 'Cart\CheckoutController@thankyou')->name('Checkout.thankyou');
+    Route::get('/ordes', 'Cart\CartController@customerOrders')->name('Customer.orders');
 });
 Route::get('/wa', function () {
     Cart::destroy();

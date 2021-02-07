@@ -42,7 +42,7 @@
                     <img src="{{URL::asset('assets/images/product_02.png')}}" alt="Image" class="img-fluid">
                     </td>
                     <td class="product-name">
-                    <h2 class="h5 text-black">{{$product->id}}</h2>
+                    <h2 class="h5 text-black">{{$product->name}}</h2>
                     </td>
                     <td>{{$product->price}}</td>
                     <td>

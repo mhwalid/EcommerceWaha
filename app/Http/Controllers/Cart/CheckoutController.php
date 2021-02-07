@@ -47,13 +47,13 @@ class CheckoutController extends Controller
         $i = 0;
 
         foreach (Cart::content() as $product) {
-            $products['product_' . $i][] = $product->model->title;
+            $products['product_' . $i][] = $product->model->name;
             $products['product_' . $i][] = $product->model->price;
             $products['product_' . $i][] = $product->qty;
             $i++;
         }
         $order->products = serialize($products);
-        $order->user_id = Auth::guard('customer')->user()->id;
+        $order->user_id = Auth::guard('customer')->id();
         $order->save();
 
         if ($data['paymentIntent']['status'] == 'succeeded') {
