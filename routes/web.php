@@ -43,6 +43,8 @@ Route::group(['middleware' => 'auth:customer'], function () {
     Route::post('/checkout', 'Cart\CheckoutController@store')->name('Checkout.store');
     Route::get('/merci', 'Cart\CheckoutController@thankyou')->name('Checkout.thankyou');
     Route::get('/ordes', 'Cart\CartController@customerOrders')->name('Customer.orders');
+    Route::post('/coupon', 'Cart\CartController@storcoupon')->name('cart.coupon');
+    Route::delete('/coupon', 'Cart\CartController@destroycoupon')->name('cart.coupon.destroy');
 });
 Route::get('/wa', function () {
     Cart::destroy();

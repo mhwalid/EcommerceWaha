@@ -3,7 +3,9 @@
 @section('content')
     <div class="site-section">
         <div class="container">
+          <div class="badge badge-pill badge-info"> <h6 style="margin-bottom: 0px;">{{$stock}}</h6></div>
           <div class="row">
+            
             <div class="col-md-5 mr-auto">
               <div class="border text-center">
                 <img src="{{URL::asset('assets/images/product_07_large.png')}}" alt="Image" class="img-fluid p-5">
@@ -19,7 +21,8 @@
               <p><del>$95.00</del>  <strong class="text-primary h4">$55.00</strong></p>
 
               
-              <form action="{{route('Cart.store')}}" method="POST">
+             @if ($stock=="Disponible")
+             <form action="{{route('Cart.store')}}" method="POST">
               <div class="mb-5">
                 <div class="input-group mb-3" style="max-width: 220px;">
                   <div class="input-group-prepend">
@@ -41,6 +44,7 @@
                   <button  type="submit" class="buy-now btn btn-sm height-auto px-4 py-3 btn-primary">Add To Cart</button></p>
                
                 </form>
+             @endif
 
               <div class="mt-5">
                 <ul class="nav nav-pills mb-3 custom-pill" id="pills-tab" role="tablist">

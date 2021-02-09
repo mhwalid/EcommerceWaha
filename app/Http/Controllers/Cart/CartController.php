@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Cart;
 
 use App\Http\Controllers\Controller;
+use App\Model\Coupon;
 use App\Model\Product;
 use Gloudemans\Shoppingcart\Facades\Cart as Cart;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class CartController extends Controller
      */
     public function index()
     {
+        //return dd(Cart::content());
         if (Cart::count() > 0) {
             return view('Cart.index');
         }
@@ -98,6 +100,10 @@ class CartController extends Controller
             Session::flash('error', 'La quantité doit est comprise entre 1 et 5.');
             return response()->json(['error' => 'Cart Quantity Has Not Been Updated']);
         }
+        if ($data['qty'] > $data['stock']) {
+            Session::flash('error', 'Il n\'y a plus assez de stock');
+            return response()->json(['error' => 'Cart Quantity is not avilabile']);
+        }
 
         Cart::update($rowId, $data['qty']);
 
@@ -123,5 +129,31 @@ class CartController extends Controller
     public function customerOrders()
     {
         return view('Customer.home');
+    }
+
+    public function storcoupon(Request $rq)
+    {
+
+        $code = $rq->get('coupon');
+
+        $coupon = Coupon::where('code', $code)->first();
+
+        if (!$coupon) {
+            return redirect()->back()->with('error', 'le coupon est invalide');
+        }
+
+        $rq->session()->put('coupon', [
+            'code' => $coupon->code,
+            'price_off' => $coupon->discount(Cart::subtotal())
+        ]);
+
+        return redirect()->back()->with('success', 'le coupon est valider');
+    }
+
+    public function destroycoupon()
+    {
+        request()->session()->forget('coupon');
+
+        return redirect()->back()->with('success', 'le coupon a bien été désactiver');
     }
 }

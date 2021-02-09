@@ -44,11 +44,11 @@
                     <td class="product-name">
                     <h2 class="h5 text-black">{{$product->name}}</h2>
                     </td>
-                    <td>{{$product->price}}</td>
+                    <td>{{  number_format($product->model->price,2,',','')}}</td>
                     <td>
                     <div class=" mb-3" style="max-width: 120px;">
                         <div class="input-group-prepend">
-                            <select class="custom-select" name="qty" id="qty" data-id="{{ $product->rowId }}">
+                            <select class="custom-select" name="qty" id="qty" data-id="{{ $product->rowId }}" data-stock="{{$product->model->in_stock}}">
                                 @for ($i = 1; $i <= 5; $i++)
                                     <option value="{{ $i }}" {{ $product->qty == $i ? 'selected' : ''}}>
                                         {{ $i }}
@@ -89,18 +89,26 @@
             <button class="btn btn-outline-primary btn-md btn-block">Continue Shopping</button>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-            <label class="text-black h4" for="coupon">Coupon</label>
-            <p>Enter your coupon code if you have one.</p>
-            </div>
-            <div class="col-md-8 mb-3 mb-md-0">
-            <input type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
-            </div>
-            <div class="col-md-4">
-            <button class="btn btn-primary btn-md px-4">Apply Coupon</button>
-            </div>
-        </div>
+           @if (!request()->session()->has('coupon'))
+            <form action="{{route('cart.coupon')}}" method="POST">
+                @csrf
+                <div class="row">
+                    <div class="col-md-12">
+                    <label class="text-black h4" for="coupon">Coupon</label>
+                    <p>Enter your coupon code if you have one.</p>
+                    </div>
+                    <div class="col-md-8 mb-3 mb-md-0">
+                    <input type="text" class="form-control py-3" name="coupon" id="coupon" placeholder="Coupon Code">
+                    </div>
+                    <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary btn-md px-4">Apply Coupon</button>
+                    </div>
+                </div>
+            </form>
+            @else
+            <h3> Le coupon  été deja appliqué </h3>
+                
+           @endif
         </div>
         <div class="col-md-6 pl-5">
         <div class="row justify-content-end">
@@ -118,6 +126,46 @@
                 <strong class="text-black">{{Cart::subtotal()}}</strong>
                 </div>
             </div>
+            @if (request()->session()->has('coupon'))
+            <div class="row mb-3">
+                <div class="col-md-6">
+                <span class="text-black">Coupon {{request()->session()->get('coupon')['code']}}</span>
+                    <form action="{{route('cart.coupon.destroy')}}" method="POST" class="d-inline-block">
+                        @csrf
+                        @method('delete')
+                        <button class="btn btn-sm btn-outline-danger"><i class="icon-trash" ></i> </button>
+                    </form>
+                </div>
+                <div class="col-md-6 text-right">
+                <strong class="text-black">{{number_format(request()->session()->get('coupon')['price_off'], 2,',','')}}</strong>
+                </div>
+            </div>
+           
+            <div class="row mb-5">
+                <div class="col-md-6">
+                <span class="text-black">NV sous-total</span>
+                </div>
+                <div class="col-md-6 text-right">
+                <strong class="text-black">{{number_format(Cart::subtotal() - request()->session()->get('coupon')['price_off'], 2,',','')}}</strong>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-md-6">
+                <span class="text-black">Tax</span>
+                </div>
+                <div class="col-md-6 text-right">
+                <strong class="text-black">{{number_format((Cart::subtotal() - request()->session()->get('coupon')['price_off'])*(config('cart.tax')/100) , 2,',','')}}</strong>
+                </div>
+            </div>
+            <div class="row mb-5">
+                <div class="col-md-6">
+                <span class="text-black">Total</span>
+                </div>
+                <div class="col-md-6 text-right">
+                <strong class="text-black">{{number_format(Cart::subtotal() - request()->session()->get('coupon')['price_off']+(Cart::subtotal() - request()->session()->get('coupon')['price_off'])*(config('cart.tax')/100), 2,',','')}}</strong>
+                </div>
+            </div>
+            @else
             <div class="row mb-5">
                 <div class="col-md-6">
                 <span class="text-black">Total</span>
@@ -126,7 +174,7 @@
                 <strong class="text-black">{{Cart::total()}}</strong>
                 </div>
             </div>
-
+            @endif
             <div class="row">
                 <div class="col-md-12">
                 <a href="{{route('Checkout.index')}}" class="btn btn-primary btn-lg btn-block" onclick="window.location='checkout.html'">Proceed To
@@ -154,6 +202,7 @@
                
                 element.addEventListener('change', function () {
                     var rowId = element.getAttribute('data-id');
+                    var stock = element.getAttribute('data-stock');
                     var token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
                     fetch(`panier/${rowId}`,
                         {
@@ -165,7 +214,8 @@
                             },
                             method: 'PATCH',
                             body: JSON.stringify({
-                                qty: this.value
+                                qty: this.value,
+                                stock: stock
                             })
                     }).then((data) => {
                         console.log(data);

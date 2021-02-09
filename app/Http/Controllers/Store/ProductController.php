@@ -67,8 +67,9 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
+        $stock = $product->in_stock == 0 ? 'Indisponible' : 'Disponible';
 
-        return view('Shop.show', compact('product'));
+        return view('Shop.show', ['product' => $product, 'stock' => $stock]);
     }
 
     public function about()

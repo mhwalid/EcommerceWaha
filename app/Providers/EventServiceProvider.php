@@ -18,6 +18,16 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+
+        'cart.added' => [
+            'App\Listeners\CartUpdateListener',
+        ],
+        'cart.updated' => [
+            'App\Listeners\CartUpdateListener',
+        ],
+        'cart.removed' => [
+            'App\Listeners\CartUpdateListener',
+        ],
     ];
 
     /**
