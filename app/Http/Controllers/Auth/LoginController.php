@@ -43,6 +43,7 @@ class LoginController extends Controller
 
     public function showCustomerLoginForm()
     {
+
         return view('auth.login', ['url' => 'customer']);
     }
 

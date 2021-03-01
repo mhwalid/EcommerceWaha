@@ -20,7 +20,7 @@ class RedirectIfAuthenticated
     {
 
         if ($guard == "customer" && Auth::guard($guard)->check()) {
-            return redirect('/ws');
+            return redirect('/');
         }
 
         return $next($request);

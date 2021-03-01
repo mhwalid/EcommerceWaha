@@ -8,17 +8,23 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Order;
 use App\Model\Product;
+use App\Notifications\OrderNotification;
 use DateTime;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Stripe\Issuing\Card;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Notification as FacadesNotification;
 
 class CheckoutController extends Controller
 {
     public function index()
     {
+
+
         if (Cart::count() > 0) {
 
             if (request()->session()->has('coupon')) {
@@ -50,7 +56,6 @@ class CheckoutController extends Controller
             Session::flash('error', 'la quantité existe plus dans le stock ');
             return response()->json(['success' => false], 400);
         }
-
         $data = $rq->json()->all();
 
         $order = new Order();
@@ -73,19 +78,21 @@ class CheckoutController extends Controller
         $order->user_id = Auth::guard('customer')->id();
         $order->save();
 
+
+
         if ($data['paymentIntent']['status'] == 'succeeded') {
             $this->updatestock();
             Cart::destroy();
             Session::flash('success', 'Votre commande a été traitée avec succès');
+            FacadesNotification::send(Auth::guard('customer')->user(), new OrderNotification($products));
             return response()->json(['success' => 'Payment Intent Succeeded']);
         } else {
             return response()->json(['error' => 'Payment Intent Not Succeeded']);
         }
-
-
-
         //return  $data['paymentIntent'];
     }
+
+
 
 
     public function thankyou()

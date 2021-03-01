@@ -8,14 +8,14 @@
         <div class="d-flex align-items-center justify-content-between">
           <div class="logo">
             <div class="site-logo">
-              <a href="{{route('Shop.index')}}" class="js-logo-clone">Pharma</a>
+              <a href="{{route('Shop.index')}}" class="js-logo-clone">Wahagsb</a>
             </div>
           </div>
           <div class="main-nav d-none d-lg-block">
             <nav class="site-navigation text-right text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
-                <li class="active"><a href="{{route('Shop.index')}}">Home</a></li>
-                <li><a href="{{route('Shop.store')}}">Store</a></li>
+                <li class="{{ Request::segment(1) === null ? 'active' :null  }}"  ><a href="{{route('Shop.index')}}">Home</a></li>
+                <li class="{{ Request::segment(1) === 'Store' ? 'active' : null }}"><a href="{{route('Shop.store')}}">Store</a></li>
                 <li class="has-children">
                   <a href="#">Dropdown</a>
                   <ul class="dropdown">
@@ -25,8 +25,8 @@
                     </li>
                   </ul>
                 </li>
-                <li><a href="{{route('Shop.index')}}">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li {{ Request::segment(1) === 'About' ? 'active' : null }}><a href="{{route('Shop.index')}}">About</a></li>
+                <li {{ Request::segment(1) === 'Contact' ? 'active' : null }}><a href="{{route('Shop.contact')}}">Contact</a></li>
               </ul>
             </nav>
           </div>

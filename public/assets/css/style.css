@@ -19,6 +19,10 @@ a {
   transition: .3s all ease; }
   a:hover {
     text-decoration: none; }
+    #pagination >nav > ul> li>span , #pagination >nav > ul> li>a{
+      padding-top: 0px !important;
+     
+    }
 
 .text-black {
   color: #000; }

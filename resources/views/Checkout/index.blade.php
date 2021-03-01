@@ -8,11 +8,11 @@
 @section('extra-js')
 <script src="https://js.stripe.com/v3/"></script>
 
-@endsection
+@endsection 
 
 @section('content')
 
-<div class="container">
+<div class="container pt-4 pb-4 mt-4 mb-4">
     <div class="col-md-12">
         <a href="{{ route('Cart.index') }}" class="btn btn-sm btn-secondary mt-3">Revenir au panier</a>
         <div class="row">

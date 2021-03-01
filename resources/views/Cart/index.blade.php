@@ -8,7 +8,7 @@
 
 
 <div class="bg-light py-3">
-    <div class="container">
+    <div class="container pt-4 pb-4 mt-4 mb-4">
       <div class="row">
         <div class="col-md-12 mb-0">
           <a href="index.html">Home</a> <span class="mx-2 mb-0">/</span> 
@@ -36,10 +36,11 @@
                 </tr>
             </thead>
             <tbody>
+                
                 @foreach (Cart::content() as $product)
                 <tr>
                     <td class="product-thumbnail">
-                    <img src="{{URL::asset('assets/images/product_02.png')}}" alt="Image" class="img-fluid">
+                    <img src="{{URL::asset('storage/'.$product->model->photo_principale)}}" alt="Image" class="img-fluid">
                     </td>
                     <td class="product-name">
                     <h2 class="h5 text-black">{{$product->name}}</h2>

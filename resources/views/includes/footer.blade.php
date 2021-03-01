@@ -1,8 +1,8 @@
-<div class="site-section bg-secondary bg-image" style="background-image: url('assets/images/bg_2.jpg');">
+<div class="site-section bg-secondary bg-image pt-4" style="background-image:url('{{asset('assets/images/bg_2.jpg')}}');">
   <div class="container">
     <div class="row align-items-stretch">
       <div class="col-lg-6 mb-5 mb-lg-0">
-        <a href="#" class="banner-1 h-100 d-flex" style="background-image: url('assets/images/bg_1.jpg');">
+        <a href="#" class="banner-1 h-100 d-flex" style="background-image:url('{{asset('assets/images/bg_1.jpg')}}');">
           <div class="banner-1-inner align-self-center">
             <h2>Pharma Products</h2>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae ex ad minus rem odio voluptatem.
@@ -11,7 +11,7 @@
         </a>
       </div>
       <div class="col-lg-6 mb-5 mb-lg-0">
-        <a href="#" class="banner-1 h-100 d-flex" style="background-image: url('assets/images/bg_2.jpg');">
+        <a href="#" class="banner-1 h-100 d-flex" style="background-image:url('{{asset('assets/images/bg_2.jpg')}}');">
           <div class="banner-1-inner ml-auto  align-self-center">
             <h2>Rated by Experts</h2>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae ex ad minus rem odio voluptatem.
@@ -30,18 +30,18 @@
 
           <div class="block-7">
             <h3 class="footer-heading mb-4">About Us</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quae reiciendis distinctio voluptates
-              sed dolorum excepturi iure eaque, aut unde.</p>
+            <p>
+              Le laboratoire WaHaGSB (Galaxy Swiss Bourdin) est une industrie pharmaceutique spécialisée dans les médicaments & les molécules ayant entrainées des complications médicales.</p>
           </div>
 
         </div>
         <div class="col-lg-3 mx-auto mb-5 mb-lg-0">
           <h3 class="footer-heading mb-4">Quick Links</h3>
           <ul class="list-unstyled">
-            <li><a href="#">Supplements</a></li>
-            <li><a href="#">Vitamins</a></li>
-            <li><a href="#">Diet &amp; Nutrition</a></li>
-            <li><a href="#">Tea &amp; Coffee</a></li>
+            <li><a href= "{{url()->current()}}?categorie=Vitamines">Vitamins</a></li>
+            <li><a href="{{url()->current()}}?categorie=Antiviraux">Antiviraux</a></li>
+            <li><a href="{{url()->current()}}?categorie=Antimycosiques">Antimycosiques</a></li>
+            <li><a href="{{url()->current()}}?categorie=Anti-inflammatoires">Anti-inflammatoires</a></li>
           </ul>
         </div>
 
@@ -49,9 +49,9 @@
           <div class="block-5 mb-5">
             <h3 class="footer-heading mb-4">Contact Info</h3>
             <ul class="list-unstyled">
-              <li class="address">203 Fake St. Mountain View, San Francisco, California, USA</li>
-              <li class="phone"><a href="tel://23923929210">+2 392 3929 210</a></li>
-              <li class="email">emailaddress@domain.com</li>
+              <li class="address">GSB Management & Controlling Sàrl, Chemin du Châtelard 13, 1860 Aigle, Suisse</li>
+              <li class="phone"><a href="tel://23923929210">+33 392 3929 210</a></li>
+              <li class="email">contactgsb@wahagsb.com</li>
             </ul>
           </div>
 

@@ -2,12 +2,13 @@
 
 namespace App\Model;
 
+use App\Notifications\EmailNotification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class Customer extends Authenticatable
+class Customer extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
     /**
@@ -45,5 +46,10 @@ class Customer extends Authenticatable
     {
 
         return $this->hasMany('App\Model\Order', 'user_id');
+    }
+
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new EmailNotification);
     }
 }

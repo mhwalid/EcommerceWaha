@@ -8,17 +8,15 @@
             
             <div class="col-md-5 mr-auto">
               <div class="border text-center">
-                <img src="{{URL::asset('assets/images/product_07_large.png')}}" alt="Image" class="img-fluid p-5">
+                <img src="{{URL::asset('storage/'.$product->photo_principale)}}" alt="Image" class="img-fluid p-5">
               </div>
             </div>
             <div class="col-md-6">
-              <h2 class="text-black">{{$product->id}} Ibuprofen Tablets, 200mg</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, vitae, explicabo? Incidunt facere, natus
-                soluta dolores iusto! Molestiae expedita veritatis nesciunt doloremque sint asperiores fuga voluptas,
-                distinctio, aperiam, ratione dolore.</p>
+              <h2 class="text-black">{{$product->name}} </h2>
+              <p>{!!$product->description!!} .</p>
               
 
-              <p><del>$95.00</del>  <strong class="text-primary h4">$55.00</strong></p>
+              <p><del>{{$product->price -7}}€ </del>  <strong class="text-primary h4">{{$product->price}}€ </strong></p>
 
               
              @if ($stock=="Disponible")
@@ -38,9 +36,9 @@
               </div>
 
               <p>
-                
+                <h4>Quantité disponible <strong > {{$product->in_stock}} </strong></h4>
                   @csrf
-                  <input type="text" name="id" value="{{$product->id}}" id="">
+                  <input type="hidden" name="id" value="{{$product->id}}" id="">
                   <button  type="submit" class="buy-now btn btn-sm height-auto px-4 py-3 btn-primary">Add To Cart</button></p>
                
                 </form>
