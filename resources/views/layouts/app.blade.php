@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Pharma &mdash; Colorlib Template</title>
+  <title>WAHAGSB</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   @yield('extra-meta')
@@ -17,8 +17,8 @@
 
   @yield('extra-js')
   <link rel="stylesheet" href="{{asset('assets/css/aos.css')}}">
-
   <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+  
 
 </head>
 <style>
@@ -27,15 +27,16 @@
 
 <body>
 
-  <div class="site-wrap">
+  <div class="site-wrap" id="app">
 
-    
+    <router-view></router-view>
     @include('includes.navbar')
     @include('includes.errors')
     @yield('content')
     @include('includes.footer')
   </div>
 
+  <script src="{{asset('js/app.js')}}"></script>
   <script src="{{asset('assets/js/jquery-3.3.1.min.js')}}"></script>
   <script src="{{asset('assets/js/jquery-ui.js')}}"></script>
   <script src="{{asset('assets/js/popper.min.js')}}"></script>

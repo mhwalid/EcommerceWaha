@@ -33,7 +33,9 @@ class ProductController extends Controller
             $products = Product::with('category')->orderBy('created_at', 'DESC')->paginate(15);
         }
 
-        return view('Shop.store', compact('products'));
+        //return view('Shop.store', compact('products'));
+
+        return response()->json($products);
     }
 
 
