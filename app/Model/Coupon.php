@@ -11,6 +11,6 @@ class Coupon extends Model
 
     public function discount($subtotal)
     {
-        return ($subtotal * ($this->price_off / 100));
+        return (floatval(implode(explode(',', $subtotal))) * ($this->price_off / 100));
     }
 }

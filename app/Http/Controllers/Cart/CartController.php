@@ -24,7 +24,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        //return dd(Cart::content());
+        //dd(Cart::content());
         if (Cart::count() > 0) {
             return view('Cart.index');
         }
@@ -49,7 +49,7 @@ class CartController extends Controller
      */
     public function store(Request $rq)
     {
-        //return dd(Cart::content());
+        // return dd(Cart::content());
         $duplicata = Cart::search(function ($cartItem, $rowId) use ($rq) {
             return $cartItem->id == $rq->id;
         });
@@ -59,8 +59,8 @@ class CartController extends Controller
         }
         $product = Product::find($rq->id);
         Cart::add($product->id, $product->name, $rq->q, $product->price)->associate('App\Model\Product');
-
-        return redirect()->route('Shop.store')->with('success', 'le produit a bien été Rajouté au panier');
+        toastr()->success('le produit a bien été Rajouté au panier');
+        return redirect()->route('Shop.store');
     }
 
     /**
@@ -102,18 +102,21 @@ class CartController extends Controller
         ]);
 
         if ($validates->fails()) {
-            Session::flash('error', 'La quantité doit est comprise entre 1 et 5.');
-            return response()->json(['error' => 'Cart Quantity Has Not Been Updated']);
+            // Session::flash('error', 'La quantité doit est comprise entre 1 et 5.');
+            // return response()->json(['error' => 'Cart Quantity Has Not Been Updated']);
+            toastr()->warning('La quantité doit est comprise entre 1 et 5.');
         }
         if ($data['qty'] > $data['stock']) {
-            Session::flash('error', 'Il n\'y a plus assez de stock');
-            return response()->json(['error' => 'Cart Quantity is not avilabile']);
+            // Session::flash('error', 'Il n\'y a plus assez de stock');
+            // return response()->json(['error' => 'Cart Quantity is not avilabile']);
+            toastr()->error('Il n\'y a plus assez de stock');
         }
 
         Cart::update($rowId, $data['qty']);
 
-        Session::flash('success', 'La quantité du produit est passée à ' . $data['qty'] . '.');
-        return response()->json(['success' => 'Cart Quantity Has Been Updated']);
+        //Session::flash('success', 'La quantité du produit est passée à ' . $data['qty'] . '.');
+        // return response()->json(['success' => 'Cart Quantity Has Been Updated']);
+        toastr()->success('La quantité a bien ete modifié ' . $data['qty'] . ' .');
     }
 
     /**
@@ -151,14 +154,14 @@ class CartController extends Controller
             'code' => $coupon->code,
             'price_off' => $coupon->discount(Cart::subtotal())
         ]);
-
-        return redirect()->back()->with('success', 'le coupon est valider');
+        toastr()->success('le coupon est valider');
+        return redirect()->back();
     }
 
     public function destroycoupon()
     {
         request()->session()->forget('coupon');
-
-        return redirect()->back()->with('success', 'le coupon a bien été désactiver');
+        toastr()->warning('le coupon a bien été désactiver');
+        return redirect()->back();
     }
 }

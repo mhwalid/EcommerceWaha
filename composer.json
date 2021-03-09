@@ -16,7 +16,8 @@
         "laravel/framework": "^7.24",
         "laravel/tinker": "^2.0",
         "stripe/stripe-php": "^7.69",
-        "tcg/voyager": "^1.4"
+        "tcg/voyager": "^1.4",
+        "yoeunes/toastr": "^1.2"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="{{asset('assets/css/aos.css')}}">
 
   <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+  @yield('css')
 
 </head>
 <style>
@@ -45,6 +46,7 @@
   <script src="{{asset('assets/js/aos.js')}}"></script>
   <script src="{{asset('assets/js/main.js')}}"></script>
   @yield('js-extra-stripe')
+  @yield('js')
 </body>
 
 </html>

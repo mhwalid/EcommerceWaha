@@ -3,6 +3,9 @@
 @section('extra-meta')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
+@section('css')
+@toastr_css
+@endsection
 
 @section('content')
 
@@ -141,13 +144,12 @@
                 <strong class="text-black">{{number_format(request()->session()->get('coupon')['price_off'], 2,',','')}}</strong>
                 </div>
             </div>
-           
             <div class="row mb-5">
                 <div class="col-md-6">
                 <span class="text-black">NV sous-total</span>
                 </div>
                 <div class="col-md-6 text-right">
-                <strong class="text-black">{{number_format(Cart::subtotal() - request()->session()->get('coupon')['price_off'], 2,',','')}}</strong>
+                <strong class="text-black">{{number_format(floatval(implode(explode(',',Cart::subtotal())))  - request()->session()->get('coupon')['price_off'], 2,',','')}}</strong>
                 </div>
             </div>
             <div class="row mb-5">
@@ -155,7 +157,7 @@
                 <span class="text-black">Tax</span>
                 </div>
                 <div class="col-md-6 text-right">
-                <strong class="text-black">{{number_format((Cart::subtotal() - request()->session()->get('coupon')['price_off'])*(config('cart.tax')/100) , 2,',','')}}</strong>
+                 <strong class="text-black">{{number_format((floatval(implode(explode(',',Cart::subtotal()))) - request()->session()->get('coupon')['price_off'])*(config('cart.tax')/100) , 2,',','')}}</strong>
                 </div>
             </div>
             <div class="row mb-5">
@@ -163,7 +165,8 @@
                 <span class="text-black">Total</span>
                 </div>
                 <div class="col-md-6 text-right">
-                <strong class="text-black">{{number_format(Cart::subtotal() - request()->session()->get('coupon')['price_off']+(Cart::subtotal() - request()->session()->get('coupon')['price_off'])*(config('cart.tax')/100), 2,',','')}}</strong>
+                {{-- <strong class="text-black">{{number_format(floatval(implode(explode(',',Cart::subtotal()))) - request()->session()->get('coupon')['price_off']+(Cart::subtotal() - request()->session()->get('coupon')['price_off'])*(config('cart.tax')/100), 2,',','')}}</strong> --}}
+                <strong class="text-black">{{number_format(floatval(implode(explode(',',Cart::subtotal()))) - request()->session()->get('coupon')['price_off']+(floatval(implode(explode(',',Cart::subtotal()))) - request()->session()->get('coupon')['price_off'])*(config('cart.tax')/100), 2,',','')}}</strong>
                 </div>
             </div>
             @else
@@ -227,4 +230,8 @@
                 });
             });
     </script>
+@endsection
+@section('js')
+@toastr_js
+@toastr_render
 @endsection

@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('css')
+@toastr_css
+@endsection
 
 @section('content')
 
@@ -56,4 +59,8 @@
     </div>
   </div>
 
+@endsection
+@section('js')
+@toastr_js
+@toastr_render
 @endsection

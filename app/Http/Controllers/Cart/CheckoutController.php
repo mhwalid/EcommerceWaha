@@ -28,7 +28,7 @@ class CheckoutController extends Controller
         if (Cart::count() > 0) {
 
             if (request()->session()->has('coupon')) {
-                $total = Cart::subtotal() - request()->session()->get('coupon')['price_off'] + (Cart::subtotal() - request()->session()->get('coupon')['price_off']) * (config('cart.tax') / 100);
+                $total = floatval(implode(explode(',', Cart::subtotal()))) - request()->session()->get('coupon')['price_off'] + (floatval(implode(explode(',', Cart::subtotal()))) - request()->session()->get('coupon')['price_off']) * (config('cart.tax') / 100);
             } else {
                 $total = Cart::total();
             }
@@ -52,6 +52,7 @@ class CheckoutController extends Controller
 
     public function store(Request $rq)
     {
+
         if ($this->notvalibel()) {
             Session::flash('error', 'la quantité existe plus dans le stock ');
             return response()->json(['success' => false], 400);
@@ -61,7 +62,12 @@ class CheckoutController extends Controller
         $order = new Order();
         $order->payment_intent_id = $data['paymentIntent']['id'];
         // $order->amount = $data['paymentIntent']['amount'];
-        $order->amount = Cart::total();
+        if (request()->session()->has('coupon')) {
+            $order->amount = Cart::subtotal() - request()->session()->get('coupon')['price_off'] + (Cart::subtotal() - request()->session()->get('coupon')['price_off']) * (config('cart.tax') / 100);
+        } else {
+            $order->amount  = Cart::total();
+        }
+        // $order->amount = Cart::total();
         $order->payment_created_at = (new DateTime())->setTimestamp($data['paymentIntent']['created'])->format('Y-m-d H:i:s');
         $products = [];
         $i = 0;
