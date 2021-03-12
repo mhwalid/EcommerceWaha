@@ -3,7 +3,7 @@
 @if (! empty($greeting))
 # {{ $greeting }}
 @else
-@if ($level === 'error')
+@if ($level ?? '' === 'error')
 # @lang('Whoops!')
 @else
 <div>
@@ -15,7 +15,7 @@
 @endif
 
 {{-- Intro Lines --}}
-@foreach ($introLines as $line)
+@foreach ($introLines ?? '' as $line)
 {{ $line }}
 
 @endforeach
@@ -23,10 +23,10 @@
 {{-- Action Button --}}
 @isset($actionText)
 <?php
-    switch ($level) {
+    switch ($level ?? '') {
         case 'success':
         case 'error':
-            $color = $level;
+            $color = $level ?? '';
             break;
         default:
             $color = 'primary';

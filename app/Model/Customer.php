@@ -45,7 +45,7 @@ class Customer extends Authenticatable implements MustVerifyEmail
     public function orders()
     {
 
-        return $this->hasMany('App\Model\Order', 'user_id');
+        return $this->hasMany('App\Model\Order', 'user_id')->orderBy('created_at', 'desc');
     }
 
     public function sendEmailVerificationNotification()

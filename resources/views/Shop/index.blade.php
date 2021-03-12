@@ -18,7 +18,7 @@
           <span class="tag">Sale</span>
         <a href="{{route('Shop.show' , $product->id)}}">  <div> <img style="width: 400px ; height: 400px;" src="{{URL::asset('storage/'.$product->photo_principale)}}" alt="Image"></a></div>
           <h3 class="text-dark"><a href="shop-single.html">{{$product->name}}</a></h3>
-          <p class="price"><del>{{$product->price +11}}</del> &mdash; {{$product->price}}</p>
+          <p class="price"><del>{{$product->price +11}} €</del> &mdash; {{$product->price}} €</p>
         </div>
         @endforeach
         
@@ -48,7 +48,7 @@
             <div class="text-center item mb-4">
               <a href="{{route('Shop.show' , $product->id)}}"> <img src="{{URL::asset('storage/'.$product->photo_principale)}}" alt="Image"></a>
               <h3 class="text-dark"><a href="shop-single.html">{{$product->name}}</a></h3>
-              <p class="price">{{$product->price}}</p>
+              <p class="price">{{$product->price}} €</p>
             </div>
             @endforeach
            

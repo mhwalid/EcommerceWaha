@@ -55,7 +55,8 @@ class CartController extends Controller
         });
 
         if ($duplicata->isNotEmpty()) {
-            return redirect()->route('Shop.store')->with('success', 'le produit a déja été ajouté au panier');
+            toastr()->warning('le produit a déja été ajouté au panier');
+            return redirect()->route('Shop.store');
         }
         $product = Product::find($rq->id);
         Cart::add($product->id, $product->name, $rq->q, $product->price)->associate('App\Model\Product');
@@ -116,7 +117,7 @@ class CartController extends Controller
 
         //Session::flash('success', 'La quantité du produit est passée à ' . $data['qty'] . '.');
         // return response()->json(['success' => 'Cart Quantity Has Been Updated']);
-        toastr()->success('La quantité a bien ete modifié ' . $data['qty'] . ' .');
+        toastr()->success('La quantité a bien ete modifié ' . $data['qty']);
     }
 
     /**
@@ -130,7 +131,8 @@ class CartController extends Controller
         //return dd($rowId);
 
         Cart::remove($rowId);
-        return redirect()->route('Cart.index')->with('success', 'le produit a bien été supprime du panier');
+        toastr()->success('le produit a bien été supprime du panier');
+        return redirect()->route('Cart.index');
     }
 
 
@@ -147,7 +149,8 @@ class CartController extends Controller
         $coupon = Coupon::where('code', $code)->first();
 
         if (!$coupon) {
-            return redirect()->back()->with('error', 'le coupon est invalide');
+            toastr()->error('le coupon est invalider');
+            return redirect()->back();
         }
 
         $rq->session()->put('coupon', [
