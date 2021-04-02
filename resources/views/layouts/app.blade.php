@@ -27,12 +27,15 @@
 
 <body>
 
-  <div class="site-wrap" id="app">
+  <div class="site-wrap" >
 
-    <router-view></router-view>
+    
+    {{-- <router-view></router-view> --}}
     @include('includes.navbar')
     @include('includes.errors')
-    @yield('content')
+    <div id="app">
+      @yield('content')
+    </div>
     @include('includes.footer')
   </div>
 

@@ -21,13 +21,15 @@ Vue.use(VueRouter)
 import Home from './components/HomeComponent.vue';
 import Exemple from './components/ExampleComponent.vue';
 import Store from './components/ListComponent.vue';
+import Index from './components/Shop/indexComponent.vue';
+import product from './components/Shop/productComponent.vue';
 
 
 
 const routes = [
-    { path: '/', component: Home },
-    { path: '/home', component: Exemple },
-    { path: '/Store', component: Store },
+    { path: '/', component: Index },
+    { path: '/Show/:id', component: product },
+    { path: '/Store', component: Store },  
   ];
 
   const router = new VueRouter({routes});
@@ -35,8 +37,8 @@ const routes = [
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('List-item', require('./components/ListComponent.vue').default);
-// Vue.component('home-component', require('./components/HomeComponent.vue').default);
+Vue.component('home-component', require('./components/HomeComponent.vue').default)
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -47,4 +49,5 @@ Vue.component('List-item', require('./components/ListComponent.vue').default);
 const app = new Vue({
     el: '#app',
     router :router,
+    hasbang : false,
 });

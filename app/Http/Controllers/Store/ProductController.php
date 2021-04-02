@@ -16,12 +16,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-
-        $products = DB::table('Products')->orderBy('updated_at', 'desc')->limit(6)->get();
-        $products1 = DB::table('Products')->where('range', '=', '2')->limit(6)->get();
         $newproduct = Product::orderBy('created_at', 'desc')->limit(4)->get();
-        return view('Shop.index', compact(['products', 'products1', 'newproduct']));
+        return view('Shop.index', compact('newproduct'));
     }
+
+
 
     public function stor()
     {
@@ -69,11 +68,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
-        $stock = $product->in_stock == 0 ? 'Indisponible' : 'Disponible';
-
-
-        return view('Shop.show', ['product' => $product, 'stock' => $stock]);
+        return view('Shop.show');
     }
 
     public function about()

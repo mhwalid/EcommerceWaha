@@ -21,6 +21,7 @@ use TCG\Voyager\Facades\Voyager;
 //page d'index
 // Route::group(['prefix' => 'Wahabs'], function () {
 Route::get('/', 'Store\ProductController@index')->name('Shop.index');
+Route::get('/data', 'Store\ProductController@index')->name('Shop.index');
 
 // Store
 Route::get('/Store', 'Store\ProductController@stor')->name('Shop.store');
