@@ -14,14 +14,21 @@
             v-for="product in productsindex"
             :key="product.id"
           >
-            <!-- <span class="tag">Sale</span>
+            <span class="tag">Sale</span>
             <img :src="'storage/' + product.photo_principale " alt />
-            src= -->
-            <router-link :to="`/Show/${product.id}`" >  <div> <img style="width: 400px ; height: 400px;" src="'storage/.$product->photo_principale" alt="Image"> 
-            </div></router-link>
+
+            <!-- <router-link :to="`/Show/${product.id}`">
+              <div>
+                <img
+                  style="width: 400px ; height: 400px;"
+                  src="'storage/.product->photo_principale'"
+                  alt="Image"
+                />
+              </div>
+            </router-link>-->
             <h3 class="text-dark">
-              <<a href="shop-single.html">{{$product.name}}</a> ,,,,
-              <router-link class="link" :to="`/Show/${product.id}`"> {{ product.name }} </router-link>-->
+              <!-- <a href="shop-single.html">{{$product.name}}</a> -->
+              <router-link class="link" :to="`/Show/${product.id}`">{{ product.name }}</router-link>
             </h3>
             <p class="price">
               <del>{{ product.price + 11 }}</del>
@@ -31,7 +38,10 @@
         </div>
         <div class="row mt-5">
           <div class="col-12 text-center">
-              <a href="{{route('Shop.store')}}" class="btn btn-primary px-4 py-3">Voir tous les produits</a> 
+            <!-- <a
+              href="{{route('Shop.store')}}"
+              class="btn btn-primary px-4 py-3"
+            >Voir tous les produits</a>-->
           </div>
         </div>
       </div>
@@ -55,7 +65,9 @@
           <div class="col-md-12 block-3 products-wrap">
             <div class="nonloop-block-3 owl-carousel">
               <div class="text-center item mb-4" v-for="product in newproduct" :key="product.id">
-                <!--<a href="{{route('Shop.show' , product->id)}}"> <img src="{{URL::asset('storage/'.$product->photo_principale)}}" alt="Image"></a> -->
+                <!--<a href="{{route('Shop.show' , product->id)}}"></a> -->
+                <img :src="'storage/' + product.photo_principale" alt="Image" />
+
                 <h3 class="text-dark">
                   <a href="shop-single.html">{{product.name}}</a>
                 </h3>
@@ -83,11 +95,10 @@ export default {
     };
   },
   created() {
-    axios
-      .get('api/index')
+    axios.get('api/index')
       .then(response => {
-        (this.productsindex = response.data.productsindex),
-          (this.newproduct = response.data.newproduct);
+        this.productsindex = response.data.productsindex;
+        this.newproduct = response.data.newproduct;
         this.loading = false;
       })
       .catch(error => console.log(error));

@@ -34,6 +34,7 @@
     @include('includes.navbar')
     @include('includes.errors')
     <div id="app">
+      <App/>
       @yield('content')
     </div>
     @include('includes.footer')

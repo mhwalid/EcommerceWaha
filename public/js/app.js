@@ -2111,6 +2111,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2125,7 +2138,8 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get('api/index').then(function (response) {
-      _this.productsindex = response.data.productsindex, _this.newproduct = response.data.newproduct;
+      _this.productsindex = response.data.productsindex;
+      _this.newproduct = response.data.newproduct;
       _this.loading = false;
     })["catch"](function (error) {
       return console.log(error);
@@ -2147,6 +2161,33 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -38008,7 +38049,21 @@ var render = function() {
                   attrs: { src: "storage/" + product.photo_principale, alt: "" }
                 }),
                 _vm._v(" "),
-                _c("h3", { staticClass: "text-dark" }),
+                _c(
+                  "h3",
+                  { staticClass: "text-dark" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "link",
+                        attrs: { to: "/Show/" + product.id }
+                      },
+                      [_vm._v(_vm._s(product.name))]
+                    )
+                  ],
+                  1
+                ),
                 _vm._v(" "),
                 _c("p", { staticClass: "price" }, [
                   _c("del", [_vm._v(_vm._s(product.price + 11))]),
@@ -38052,6 +38107,13 @@ var render = function() {
                   "div",
                   { key: product.id, staticClass: "text-center item mb-4" },
                   [
+                    _c("img", {
+                      attrs: {
+                        src: "storage/" + product.photo_principale,
+                        alt: "Image"
+                      }
+                    }),
+                    _vm._v(" "),
                     _c("h3", { staticClass: "text-dark" }, [
                       _c("a", { attrs: { href: "shop-single.html" } }, [
                         _vm._v(_vm._s(product.name))
@@ -38123,8 +38185,288 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
-var staticRenderFns = []
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "site-section" }, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "badge badge-pill badge-info" }, [
+        _c("h6", { staticStyle: { "margin-bottom": "0px" } }, [
+          _vm._v(_vm._s(_vm.stock))
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("h2", { staticClass: "text-black" }, [
+            _vm._v(_vm._s(_vm.product.name))
+          ]),
+          _vm._v(" "),
+          _c("p", [_vm._v("{!!product.description!!} .")]),
+          _vm._v(" "),
+          _c("p", [
+            _c("del", [_vm._v(_vm._s(_vm.product.price - 7) + "€")]),
+            _vm._v(" "),
+            _c("strong", { staticClass: "text-primary h4" }, [
+              _vm._v(_vm._s(_vm.product.price) + "€")
+            ])
+          ]),
+          _vm._v(" "),
+          (_vm.stock = "Disponible")
+            ? _c("form", { attrs: { method: "POST" } }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("p"),
+                _vm._v(" "),
+                _c("h4", [
+                  _vm._v("\n            Quantité disponible\n            "),
+                  _c("strong", [_vm._v(_vm._s(_vm.product.in_stock))])
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm._m(2)
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-5 mr-auto" }, [
+      _c("div", { staticClass: "border text-center" }, [
+        _c("img", {
+          staticClass: "img-fluid p-5",
+          attrs: { src: "'storage/.$product->photo_principale", alt: "Image" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-5" }, [
+      _c(
+        "div",
+        {
+          staticClass: "input-group mb-3",
+          staticStyle: { "max-width": "220px" }
+        },
+        [
+          _c("div", { staticClass: "input-group-prepend" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-primary js-btn-minus",
+                attrs: { type: "button" }
+              },
+              [_vm._v("−")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control text-center",
+            attrs: {
+              type: "text",
+              name: "q",
+              id: "q",
+              value: "1",
+              placeholder: "",
+              "aria-label": "Example text with button addon",
+              "aria-describedby": "button-addon1"
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group-append" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-primary js-btn-plus",
+                attrs: { type: "button" }
+              },
+              [_vm._v("+")]
+            )
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mt-5" }, [
+      _c(
+        "ul",
+        {
+          staticClass: "nav nav-pills mb-3 custom-pill",
+          attrs: { id: "pills-tab", role: "tablist" }
+        },
+        [
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link active",
+                attrs: {
+                  id: "pills-home-tab",
+                  "data-toggle": "pill",
+                  href: "#pills-home",
+                  role: "tab",
+                  "aria-controls": "pills-home",
+                  "aria-selected": "true"
+                }
+              },
+              [_vm._v("Ordering Information")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link",
+                attrs: {
+                  id: "pills-profile-tab",
+                  "data-toggle": "pill",
+                  href: "#pills-profile",
+                  role: "tab",
+                  "aria-controls": "pills-profile",
+                  "aria-selected": "false"
+                }
+              },
+              [_vm._v("Specifications")]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "tab-content", attrs: { id: "pills-tabContent" } },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "tab-pane fade show active",
+              attrs: {
+                id: "pills-home",
+                role: "tabpanel",
+                "aria-labelledby": "pills-home-tab"
+              }
+            },
+            [
+              _c("table", { staticClass: "table custom-table" }, [
+                _c("thead", [
+                  _c("th", [_vm._v("Material")]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v("Description")]),
+                  _vm._v(" "),
+                  _c("th", [_vm._v("Packaging")])
+                ]),
+                _vm._v(" "),
+                _c("tbody", [
+                  _c("tr", [
+                    _c("th", { attrs: { scope: "row" } }, [
+                      _vm._v("OTC022401")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "Pain Management: Acetaminophen PM Extra-Strength Caplets, 500 mg, 100/Bottle"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("1 BT")])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("th", { attrs: { scope: "row" } }, [
+                      _vm._v("OTC022401")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "Pain Management: Acetaminophen PM Extra-Strength Caplets, 500 mg, 100/Bottle"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("144/CS")])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("th", { attrs: { scope: "row" } }, [
+                      _vm._v("OTC022401")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _vm._v(
+                        "Pain Management: Acetaminophen PM Extra-Strength Caplets, 500 mg, 100/Bottle"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("1 EA")])
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "tab-pane fade",
+              attrs: {
+                id: "pills-profile",
+                role: "tabpanel",
+                "aria-labelledby": "pills-profile-tab"
+              }
+            },
+            [
+              _c("table", { staticClass: "table custom-table" }, [
+                _c("tbody", [
+                  _c("tr", [
+                    _c("td", [_vm._v("HPIS CODE")]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "bg-light" }, [
+                      _vm._v("999_200_40_0")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", [_vm._v("HEALTHCARE PROVIDERS ONLY")]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "bg-light" }, [_vm._v("No")])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", [_vm._v("LATEX FREE")]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "bg-light" }, [_vm._v("Yes, No")])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", [_vm._v("MEDICATION ROUTE")]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "bg-light" }, [_vm._v("Topical")])
+                  ])
+                ])
+              ])
+            ]
+          )
+        ]
+      )
+    ])
+  }
+]
+render._withStripped = true
 
 
 
@@ -53485,24 +53827,18 @@ var routes = [{
   path: '/',
   component: _components_Shop_indexComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
 }, {
-  path: '/home',
-  component: _components_ExampleComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  path: '/Show/:id',
+  component: _components_Shop_productComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
 }, {
   path: '/Store',
   component: _components_ListComponent_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
-}, {
-  path: '/product',
-  component: _components_Shop_productComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   routes: routes
 }); // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('home-component', __webpack_require__(/*! ./components/HomeComponent.vue */ "./resources/js/components/HomeComponent.vue")["default"]);
-Vue.component('List-item', __webpack_require__(/*! ./components/ListComponent.vue */ "./resources/js/components/ListComponent.vue")["default"]);
-Vue.component('indexComponent', __webpack_require__(/*! ./components/Shop/indexComponent.vue */ "./resources/js/components/Shop/indexComponent.vue")["default"]);
-Vue.component('productComponent', __webpack_require__(/*! ./components/Shop/productComponent.vue */ "./resources/js/components/Shop/productComponent.vue")["default"]);
+Vue.component('Index', __webpack_require__(/*! ./components/Shop/indexComponent.vue */ "./resources/js/components/Shop/indexComponent.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -53512,9 +53848,7 @@ Vue.component('productComponent', __webpack_require__(/*! ./components/Shop/prod
 var app = new Vue({
   el: '#app',
   router: router,
-  components: {
-    Index: _components_Shop_indexComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
-  }
+  hasbang: false
 });
 
 /***/ }),
