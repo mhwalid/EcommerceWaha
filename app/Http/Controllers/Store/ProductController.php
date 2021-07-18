@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Store;
 
 use App\Http\Controllers\Controller;
 use App\Model\Product;
+use App\Model\ProductOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class ProductController extends Controller
 {
@@ -16,7 +18,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-
+        // return dd(Product::find(32));
         $products = DB::table('Products')->orderBy('updated_at', 'desc')->limit(6)->get();
         $products1 = DB::table('Products')->where('range', '=', '2')->limit(6)->get();
         $newproduct = Product::orderBy('created_at', 'desc')->limit(4)->get();

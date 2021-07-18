@@ -38,11 +38,11 @@
                 <th class="product-remove">Remove</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody style='color: lightgreen'>
                 
                 @foreach (Cart::content() as $product)
-                <tr>
-                    <td class="product-thumbnail">
+                <tr {{ ($product->model->order) ? 'style=background-color:lightgreen':'' }} >
+                    <td class="product-thumbnail" >
                     <img src="{{URL::asset('storage/'.$product->model->photo_principale)}}" alt="Image" class="img-fluid">
                     </td>
                     <td class="product-name">
@@ -51,7 +51,7 @@
                     <td>{{  number_format($product->model->price,2,',','')}}</td>
                     <td>
                     <div class=" mb-3" style="max-width: 120px;">
-                        <div class="input-group-prepend">
+                        <div class="input-group-prepend" style="">
                             <select class="custom-select" name="qty" id="qty" data-id="{{ $product->rowId }}" data-stock="{{$product->model->in_stock}}">
                                 @for ($i = 1; $i <= 5; $i++)
                                     <option value="{{ $i }}" {{ $product->qty == $i ? 'selected' : ''}}>

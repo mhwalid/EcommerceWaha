@@ -14,6 +14,7 @@
 
       <div class="row">
         @foreach ($products as $product)
+        
         <div class="col-sm-6 col-lg-4 text-center item mb-4">
           <span class="tag">Sale</span>
         <a href="{{route('Shop.show' , $product->id)}}">  <div> <img style="width: 400px ; height: 400px;" src="{{URL::asset('storage/'.$product->photo_principale)}}" alt="Image"></a></div>

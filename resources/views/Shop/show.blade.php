@@ -13,6 +13,11 @@
             </div>
             <div class="col-md-6">
               <h2 class="text-black">{{$product->name}} </h2>
+              {{dd($product->Order)}}
+              @if($product->order)
+
+              <h5><em style="color: lightcoral">ce medicament est sous une ordonnance</em></h5>
+              @endif 
               <p>{!!$product->description!!} .</p>
               
 

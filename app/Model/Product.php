@@ -11,7 +11,7 @@ class Product extends Model
     public $timestamps = true;
 
     use SoftDeletes;
-    protected $dates = ['deleted_at'];
+    // protected $dates = ['deleted_at'];
     protected $fillable = [
         'name',
         'description',
@@ -20,12 +20,18 @@ class Product extends Model
         'category_id',
         'in_stock',
         'status',
-        'range'
+        'range',
+        'order'
     ];
 
 
     public function category()
     {
         return $this->belongsTo('App\Model\Category');
+    }
+
+    public function Order()
+    {
+        return $this->belongsTo('App\Model\ProductOrder');
     }
 }
